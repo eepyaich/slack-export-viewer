@@ -12,22 +12,22 @@
 {%- endmacro %}
 
 {% macro render_message(message, preview_size=None, no_external_references=False) -%}
-    <div class="message-container{%if message.subtype %} {{message.subtype}}{%endif%}">
+    <div class="message-container  {%if message.subtype %} {{message.subtype}}{%endif%}" style="clear: left; min-height: 56px; color: #000000; font-family: lato, sans-serif; font-size: medium;">
         <div id="{{ message.id }}">
             {% if not no_external_references %}
-                {% if message.img %}<img src="{{ message.img }}" class="user_icon" />{%else%}<div class="user_icon"></div>{%endif%}
+                {% if message.img %}<img src="{{ message.img }}" class="user_icon" style="background-color: #f8f4f0; width: 36px; height: 36px; border-radius: 0.2em; vertical-align: top; margin-right: 0.65em; float: left;"/>{%else%}<div class="user_icon" style="background-color: #f8f4f0; width: 36px; height: 36px; border-radius: 0.2em; vertical-align: top; margin-right: 0.65em; float: left;"></div>{%endif%}
             {% endif %}
-            <div class="message">
-                <div class="username">{{ message.username }}
+            <div class="message" style="display: inline-block; vertical-align: top; line-height: 1;">
+                <div class="username" style="display: inline-block; font-weight: 600; line-height: 1;">{{ message.username }}
                     {%if message.user.email%} <span class="print-only user-email">({{message.user.email}})</span>{%endif%}
                 </div>
-                <a href="#{{ message.id}}"><div class="time">{{ message.time }}</div></a>
-                <div class="msg">
+                <a href="#{{ message.id}}"><div class="time" style="display: inline-block; color: #c8c8c8; margin-left: 0.5em;">{{ message.time }}</div></a>
+                <div class="msg" style="line-height: 1.5;">
                     {{ message.msg|safe }}
                     {% for attachment in message.attachments -%}
-                        <div class="message-attachment"
-                            {%if attachment.color %}style="border-color: #{{attachment.color}}"{%endif%}>
-                            {%if attachment.service_name %}<div class="service-name">{{ attachment.service_name }}</div>{%endif%}
+                        <div class="message-attachment" 
+                            {%if attachment.color %}style="border-color: #{{attachment.color}} padding-left: 5px; border-left: 2px"{%endif%}>
+                            {%if attachment.service_name %}<div class="service-name" style="color: #999999;">{{ attachment.service_name }}</div>{%endif%}
                             {%if attachment.author_name%}
                                 <div class="attachment-author">
                                     {% if not no_external_references %}
@@ -55,7 +55,7 @@
                                     <div class="print-only">Original URL: {{attachment.original_url}}</div>
                                 {% endif %}
                                 {%if attachment.footer%}
-                                    <div class="attachment-footer">
+                                    <div class="attachment-footer" style="font-size: small;">
                                         <img src="{{attachment.footer_icon}}" class="icon" />
                                         {{attachment.footer}}
                                     </div>
